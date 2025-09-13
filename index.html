@@ -370,6 +370,27 @@
         .file-input input[type="file"] {
             display: none;
         }
+
+        .status-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--muted);
+        }
+
+        .status-dot.loaded {
+            background: var(--success);
+        }
     </style>
 </head>
 <body>
@@ -416,8 +437,13 @@
             </div>
         </div>
 
+        <div class="status-indicator">
+            <span id="statusDot" class="status-dot"></span>
+            <span id="statusText">Checking for affirmations.txt...</span>
+        </div>
+
         <div class="note">
-            Alternatively, put a file named <code>/affirmations.txt</code> (one affirmation per line) on the same host to use your own 10,000+ affirmations.
+            For GitHub Pages, make sure your <code>affirmations.txt</code> file is in the same directory as this HTML file.
         </div>
 
         <footer>
@@ -472,6 +498,8 @@
         const TOAST = document.getElementById('toast');
         const CUSTOM_FILE = document.getElementById('customFile');
         const FILE_NAME = document.getElementById('fileName');
+        const STATUS_DOT = document.getElementById('statusDot');
+        const STATUS_TEXT = document.getElementById('statusText');
 
         const STORAGE_KEY = 'affirm_idx_v1';
         let affirmationsList = [];
@@ -487,15 +515,32 @@
             }, 3000);
         }
 
+        // Update status indicator
+        function updateStatus(status, isLoaded = false) {
+            STATUS_TEXT.textContent = status;
+            STATUS_DOT.className = isLoaded ? 'status-dot loaded' : 'status-dot';
+        }
+
         // Load external file
         async function loadExternalList(){
             try{
-                const resp = await fetch('/affirmations.txt', {cache: "no-store"});
-                if(!resp.ok) throw new Error('no file');
+                updateStatus('Loading affirmations.txt...');
+                // For GitHub Pages, we need to use the correct path
+                const resp = await fetch('affirmations.txt', {cache: "no-store"});
+                if(!resp.ok) throw new Error('File not found');
+                
                 const text = await resp.text();
                 const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-                return lines.length ? lines : null;
-            }catch(e){
+                
+                if (lines.length) {
+                    updateStatus(`Loaded ${lines.length} affirmations from affirmations.txt`, true);
+                    return lines;
+                } else {
+                    throw new Error('File is empty');
+                }
+            } catch(e) {
+                updateStatus('Using built-in affirmations (affirmations.txt not found)', false);
+                console.log('Could not load external file, using fallback:', e.message);
                 return null;
             }
         }
@@ -516,6 +561,7 @@
                     affirmationsList = lines;
                     setStoredIndex(0); // Reset to first affirmation
                     pickAndShow(affirmationsList);
+                    updateStatus(`Loaded ${lines.length} affirmations from your file`, true);
                     showToast(`Loaded ${lines.length} affirmations from your file!`, true);
                 } else {
                     showToast('The file appears to be empty. Using default affirmations.');
