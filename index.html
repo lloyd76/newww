@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ten Thousand Affirmations — Happy Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg1: #0f172a;
+            --bg2: #0b1220;
+            --accent: #ff6b9a;
+            --accent2: #7c3aed;
+            --muted: rgba(255,255,255,0.75);
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --success: #06d6a0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #fff;
+        }
+        
+        body {
+            background: 
+                radial-gradient(1200px 600px at 10% 10%, rgba(255, 107, 154, 0.15), transparent 25%),
+                radial-gradient(1000px 500px at 90% 90%, rgba(79, 70, 229, 0.1), transparent 25%),
+                linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 107, 154, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.07) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .card {
+            width: min(800px, 100%);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: clamp(20px, 4vw, 40px);
+            box-shadow: 
+                0 25px 50px -12px rgba(2, 6, 23, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, 
+                rgba(255, 107, 154, 0.1) 0%, 
+                rgba(124, 58, 237, 0.1) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.25);
+            flex-shrink: 0;
+        }
+        
+        .header-text h1 {
+            font-size: clamp(18px, 2.5vw, 22px);
+            margin: 0 0 4px 0;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #fff, rgba(255,255,255,0.9));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-text p.lead {
+            margin: 0;
+            color: var(--muted);
+            font-size: clamp(12px, 1.5vw, 14px);
+            line-height: 1.5;
+        }
+
+        .affirmation-container {
+            position: relative;
+            margin: 32px 0;
+        }
+
+        .affirmation {
+            font-size: clamp(20px, 3vw, 32px);
+            line-height: 1.4;
+            font-weight: 600;
+            text-align: center;
+            padding: clamp(20px, 4vw, 32px);
+            border-radius: 20px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            box-shadow: 
+                inset 0 2px 4px rgba(255, 255, 255, 0.03),
+                inset 0 -6px 24px rgba(2, 6, 23, 0.2);
+            transform-origin: center;
+            animation: fadeIn 800ms cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .affirmation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, 
+                rgba(255, 107, 154, 0.05) 0%, 
+                rgba(124, 58, 237, 0.05) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes fadeIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(20px) scale(0.98);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            outline: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: white;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--muted);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        
+        .note {
+            margin-top: 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .note code {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        footer {
+            margin-top: 24px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #confetti {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .progress {
+            height: 4px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            margin-top: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            position: absolute;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .affirmation {
+                padding: 20px 16px;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .file-upload p {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .file-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .file-input label {
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .file-input label:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .file-input input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" role="main" aria-live="polite">
+        <canvas id="confetti"></canvas>
+
+        <header>
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="header-text">
+                <h1>Happy Birthday — A Word For Every Refresh</h1>
+                <p class="lead">Each time you refresh this page, a new affirmation appears. Keep refreshing until you find the one that makes her smile the widest.</p>
+            </div>
+        </header>
+
+        <div class="affirmation-container">
+            <div id="affirmation" class="affirmation">Loading affirmation…</div>
+            <div class="progress">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="copyBtn" class="btn-primary">
+                <i class="fas fa-copy"></i> Copy
+            </button>
+            <button id="shareBtn" class="btn-secondary">
+                <i class="fas fa-share-alt"></i> Share
+            </button>
+            <button id="nextBtn" class="btn-secondary" title="Show next without refresh">
+                <i class="fas fa-forward"></i> Next
+            </button>
+        </div>
+
+        <div class="file-upload">
+            <p>Upload your own affirmations file (one per line):</p>
+            <div class="file-input">
+                <label for="customFile">
+                    <i class="fas fa-upload"></i> Choose File
+                    <input type="file" id="customFile" accept=".txt">
+                </label>
+                <span id="fileName">No file chosen</span>
+            </div>
+        </div>
+
+        <div class="note">
+            Alternatively, put a file named <code>/affirmations.txt</code> (one affirmation per line) on the same host to use your own 10,000+ affirmations.
+        </div>
+
+        <footer>
+            <i class="fas fa-code"></i>
+            <div class="small">Made with love — Customize the list and layout as you like.</div>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Fallback affirmations
+        const FALLBACK_AFFIRMATIONS = [
+            "You are loved more than you know, today and always.",
+            "Your laugh is my favorite sound in the world.",
+            "You are braver than you believe and stronger than you seem.",
+            "Every day with you is my new favorite day.",
+            "You make the ordinary feel like magic.",
+            "Your kindness changes people quietly but profoundly.",
+            "I admire the way you see the world and make it better.",
+            "You are beautiful, brilliant, and worthy of every good thing.",
+            "Your presence is my peace and my greatest gift.",
+            "You inspire me to be the best version of myself.",
+            "Being loved by you makes everything brighter.",
+            "I treasure your heart and the way you love so freely.",
+            "Your courage when things get tough leaves me in awe.",
+            "You deserve every single dream you have.",
+            "Thank you for being you — perfectly, wonderfully you.",
+            "Your smile can light up whole rooms and days.",
+            "I love how you make even the small moments memorable.",
+            "You are my favorite person, today and every day.",
+            "You are creative, capable, and deserving of joy.",
+            "You do so much good — seen and unseen.",
+            "Your patience and warmth are a rare and beautiful thing.",
+            "I fall for you all over again, every single day.",
+            "You are enough, exactly as you are.",
+            "Your strength is gentle and real — it moves me.",
+            "You brighten lives just by being in them.",
+            "I trust you, and I believe in your dreams.",
+            "There's no one else I'd rather share life's adventures with.",
+            "You are the calm to my chaos and the spark to my joy.",
+            "Your love is a home I never want to leave.",
+            "You make the world a softer, sweeter place."
+        ];
+
+        // DOM elements
+        const AFFIRMATION_ELEMENT = document.getElementById('affirmation');
+        const COPY_BTN = document.getElementById('copyBtn');
+        const SHARE_BTN = document.getElementById('shareBtn');
+        const NEXT_BTN = document.getElementById('nextBtn');
+        const PROGRESS_BAR = document.getElementById('progressBar');
+        const TOAST = document.getElementById('toast');
+        const CUSTOM_FILE = document.getElementById('customFile');
+        const FILE_NAME = document.getElementById('fileName');
+
+        const STORAGE_KEY = 'affirm_idx_v1';
+        let affirmationsList = [];
+
+        // Toast notification
+        function showToast(message, isSuccess = false) {
+            TOAST.textContent = message;
+            TOAST.className = isSuccess ? 'toast success' : 'toast';
+            TOAST.classList.add('visible');
+            
+            setTimeout(() => {
+                TOAST.classList.remove('visible');
+            }, 3000);
+        }
+
+        // Load external file
+        async function loadExternalList(){
+            try{
+                const resp = await fetch('/affirmations.txt', {cache: "no-store"});
+                if(!resp.ok) throw new Error('no file');
+                const text = await resp.text();
+                const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+                return lines.length ? lines : null;
+            }catch(e){
+                return null;
+            }
+        }
+
+        // Handle file upload
+        CUSTOM_FILE.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            FILE_NAME.textContent = file.name;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                const lines = content.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+                
+                if (lines.length > 0) {
+                    affirmationsList = lines;
+                    setStoredIndex(0); // Reset to first affirmation
+                    pickAndShow(affirmationsList);
+                    showToast(`Loaded ${lines.length} affirmations from your file!`, true);
+                } else {
+                    showToast('The file appears to be empty. Using default affirmations.');
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // Storage functions
+        function getStoredIndex(){
+            const raw = localStorage.getItem(STORAGE_KEY);
+            const n = parseInt(raw,10);
+            return Number.isFinite(n) ? n : 0;
+        }
+        
+        function setStoredIndex(n){ 
+            localStorage.setItem(STORAGE_KEY, String(n)); 
+        }
+
+        // Display affirmation
+        function pickAndShow(list){
+            if(!list || !list.length) return;
+            let idx = getStoredIndex();
+            idx = idx % list.length;
+            const item = list[idx];
+            
+            // Update progress bar
+            PROGRESS_BAR.style.width = `${((idx + 1) / list.length) * 100}%`;
+            
+            AFFIRMATION_ELEMENT.textContent = item;
+            AFFIRMATION_ELEMENT.setAttribute('aria-atomic','true');
+            setStoredIndex(idx + 1);
+            fireConfetti();
+        }
+
+        // Initialize
+        async function init(){
+            const external = await loadExternalList();
+            affirmationsList = external || FALLBACK_AFFIRMATIONS;
+            window._affirm_list = affirmationsList;
+            pickAndShow(affirmationsList);
+        }
+
+        // Next button functionality
+        function showNext(){
+            const list = window._affirm_list || FALLBACK_AFFIRMATIONS;
+            let idx = getStoredIndex();
+            idx = idx % list.length;
+            const nextIdx = (idx + 1) % list.length;
+            setStoredIndex(nextIdx + 1);
+            
+            PROGRESS_BAR.style.width = `${((nextIdx + 1) / list.length) * 100}%`;
+            
+            AFFIRMATION_ELEMENT.textContent = list[nextIdx];
+            fireConfetti();
+        }
+
+        // Copy button
+        COPY_BTN.addEventListener('click', async ()=>{
+            const txt = AFFIRMATION_ELEMENT.textContent || '';
+            try{
+                await navigator.clipboard.writeText(txt);
+                showToast('Copied to clipboard!', true);
+            }catch(e){
+                showToast('Failed to copy to clipboard');
+            }
+        });
+
+        // Share button
+        SHARE_BTN.addEventListener('click', async ()=>{
+            const txt = AFFIRMATION_ELEMENT.textContent || '';
+            if(navigator.share){
+                try{
+                    await navigator.share({title:'Birthday Affirmation', text: txt, url: location.href});
+                }catch(e){}
+            } else {
+                try{
+                    await navigator.clipboard.writeText(txt + '\n\n' + location.href);
+                    showToast('Affirmation copied. Paste it to share!', true);
+                }catch(e){
+                    showToast('Sharing not supported. Copy manually.');
+                }
+            }
+        });
+
+        NEXT_BTN.addEventListener('click', showNext);
+
+        // Confetti animation
+        function fireConfetti(){
+            const canvas = document.getElementById('confetti');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const DPR = window.devicePixelRatio || 1;
+            
+            function resize(){
+                canvas.width = canvas.clientWidth * DPR;
+                canvas.height = canvas.clientHeight * DPR;
+                ctx.scale(DPR, DPR);
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const pieces = [];
+            const colors = ['#ff6b9a','#ffd166','#8ecae6','#7c3aed','#06d6a0', '#ff9e64'];
+            const shapes = ['circle', 'rect', 'heart'];
+            
+            for(let i = 0; i < 100; i++){
+                const size = 6 + Math.random() * 10;
+                pieces.push({
+                    x: Math.random() * canvas.clientWidth,
+                    y: -Math.random() * 200,
+                    size: size,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: 2 + Math.random() * 5,
+                    r: (Math.random() * 360),
+                    vr: (Math.random() - 0.5) * 10,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.random() * Math.PI,
+                    shape: shapes[Math.floor(Math.random() * shapes.length)],
+                    opacity: 0.8 + Math.random() * 0.2
+                });
+            }
+
+            let t = 0;
+            function frame(){
+                ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+                
+                for(const p of pieces){
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.05;
+                    p.r += p.vr * 0.01;
+                    p.tilt += 0.08;
+                    
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(Math.sin(p.tilt) * 0.4);
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fillStyle = p.color;
+                    
+                    if(p.shape === 'circle') {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, p.size/2, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else if(p.shape === 'heart') {
+                        drawHeart(ctx, 0, 0, p.size);
+                    } else {
+                        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                    }
+                    
+                    ctx.restore();
+                }
+                t++;
+                if(t < 250) {
+                    requestAnimationFrame(frame);
+                }
+            }
+            requestAnimationFrame(frame);
+        }
+
+        function drawHeart(ctx, x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(size/12, size/12);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.bezierCurveTo(5, -5, 5, -10, 0, -10);
+            ctx.bezierCurveTo(-12, -10, -12, 5, 0, 10);
+            ctx.bezierCurveTo(12, 5, 12, -10, 0, -10);
+            ctx.bezierCurveTo(-5, -10, -5, -5, 0, 0);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowRight') {
+                e.preventDefault();
+                showNext();
+            }
+        });
+
+        // Initialize the app
+        init();
+    </script>
+</body>
+</html>
